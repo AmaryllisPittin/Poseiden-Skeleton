@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class CurvePoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
     @Column(name = "CurveId")
     private Integer curveId;
