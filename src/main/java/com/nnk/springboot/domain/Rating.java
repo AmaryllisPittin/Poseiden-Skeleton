@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer ratingId;
 
     private String moodysRating;
     private String sandPRating;

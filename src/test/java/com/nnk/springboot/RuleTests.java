@@ -2,14 +2,12 @@ package com.nnk.springboot;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +24,7 @@ public class RuleTests {
 
 		// Save
 		rule = ruleNameRepository.save(rule);
-		assertNotNull(rule.getId());
+		assertNotNull(rule.getRuleNameId());
 		assertTrue(rule.getName().equals("Rule Name"));
 
 		// Update
@@ -39,7 +37,7 @@ public class RuleTests {
 		assertTrue(listResult.size() > 0);
 
 		// Delete
-		Integer id = rule.getId();
+		Integer id = rule.getRuleNameId();
 		ruleNameRepository.delete(rule);
 		Optional<RuleName> ruleList = ruleNameRepository.findById(id);
 		assertFalse(ruleList.isPresent());

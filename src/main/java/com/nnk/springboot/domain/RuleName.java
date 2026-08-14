@@ -15,7 +15,7 @@ import lombok.Setter;
 public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer ruleNameId;
 
     private String name;
     private String description;
