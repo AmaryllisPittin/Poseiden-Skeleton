@@ -15,6 +15,7 @@ import lombok.Setter;
 public class RuleName {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id")
     private Integer ruleNameId;
 
     private String name;

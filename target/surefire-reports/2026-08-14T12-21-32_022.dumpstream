@@ -1,0 +1,5 @@
+# Created at 2026-08-14T12:21:32.657
+Boot Manifest-JAR contains absolute paths in classpath 'D:\OPENCLASSROOM\DEVELLOPPEMENT APPLICATION JAVA\P7 - Complétez votre backend pour rendre votre application plus sécurisée\JavaDA_PROJECT7_RESTAPI\Poseiden-skeleton\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

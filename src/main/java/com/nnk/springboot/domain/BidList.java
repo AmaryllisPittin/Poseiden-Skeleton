@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class BidList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BidListId")
     private Integer bidListId;
 
     @Column(nullable = false, length = 30)
