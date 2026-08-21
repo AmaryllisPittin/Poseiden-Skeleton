@@ -1,8 +1,9 @@
 package com.nnk.springboot;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Created by Khang Nguyen.
@@ -12,9 +13,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 @SpringBootTest
 public class PasswordEncodeTest {
+
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Test
     public void testPassword() {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String pw = encoder.encode("123456");
         System.out.println("[ " + pw + " ]");
     }
