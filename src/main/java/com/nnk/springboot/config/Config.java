@@ -37,11 +37,20 @@ public class Config {
                                                 .permitAll()
                                                 // Autorise les requêtes HTTP OPTIONS
                                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                                // Admin
+                                                .requestMatchers("/user/list", "/user/update/**", "/user/delete/**")
+                                                .hasRole("ADMIN")
                                                 // Toutes les autres routes nécessitent une authentification
                                                 .anyRequest().authenticated())
                                 // Désactive le formulaire de connexion par défaut de Spring Security
                                 .formLogin(form -> form
                                                 .loginPage("/login")
+                                                .defaultSuccessUrl("/home", true)
+                                                .permitAll())
+                                // Déconnexion
+                                .logout(logout -> logout
+                                                .logoutUrl("/logout")
+                                                .logoutSuccessUrl("/home")
                                                 .permitAll())
                                 // Désactive l'authentification HTTP Basic
                                 .httpBasic(httpBasic -> httpBasic.disable())
@@ -70,7 +79,7 @@ public class Config {
                         return org.springframework.security.core.userdetails.User
                                         .withUsername(user.getUsername())
                                         .password(user.getPassword())
-                                        .roles("USER")
+                                        .roles(user.getRole())
                                         .build();
                 };
         }
