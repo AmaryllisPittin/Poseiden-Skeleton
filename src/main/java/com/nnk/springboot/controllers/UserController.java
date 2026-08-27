@@ -5,7 +5,6 @@ import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private PasswordEncoder encoder;
-
     @RequestMapping("/user/list")
     public String home(Model model) {
         model.addAttribute("users", userService.findAll());
@@ -41,9 +37,7 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            user.setPassword(encoder.encode(user.getPassword()));
             userService.save(user);
-            model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";
         }
         return "user/add";
@@ -64,11 +58,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "user/update";
         }
-
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userService.save(user);
-        model.addAttribute("users", userService.findAll());
+        userService.update(id, user);
         return "redirect:/user/list";
     }
 

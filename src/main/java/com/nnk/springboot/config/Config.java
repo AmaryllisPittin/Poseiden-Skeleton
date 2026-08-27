@@ -30,7 +30,7 @@ public class Config {
                                 // Configure les règles d'accès aux routes et ressources
                                 .authorizeHttpRequests(auth -> auth
                                                 // Routes et ressources accessibles SANS authentification
-                                                .requestMatchers("/", "/login", "/home", "/user/add", "/user/list",
+                                                .requestMatchers("/", "/login", "/home", "/user/add", "/user/validate",
                                                                 "/403", "/error",
                                                                 "/css/**",
                                                                 "/js/**", "/images/**", "/favicon.ico")
