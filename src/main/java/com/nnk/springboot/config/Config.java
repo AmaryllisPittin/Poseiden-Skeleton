@@ -20,55 +20,58 @@ import com.nnk.springboot.repositories.UserRepository;
 @EnableWebSecurity
 
 public class Config {
-    // Configure les règles de sécurité et d'accès aux routes de l'application
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // Configure les règles de sécurité et d'accès aux routes de l'application
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http
-                // Désactive la protection CSRF
-                .csrf(csrf -> csrf.disable())
-                // Configure les règles d'accès aux routes et ressources
-                .authorizeHttpRequests(auth -> auth
-                        // Routes et ressources accessibles SANS authentification
-                        .requestMatchers("/", "/login", "/home", "/user/add", "/403",
-                                "/css/style.css",
-                                "/js/**", "/images/**", "/favicon.ico")
-                        .permitAll()
-                        // Autorise les requêtes HTTP OPTIONS
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // Toutes les autres routes nécessitent une authentification
-                        .anyRequest().authenticated())
-                // Désactive le formulaire de connexion par défaut de Spring Security
-                .formLogin(form -> form.disable())
-                // Désactive l'authentification HTTP Basic
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .build();
-    }
+                return http
+                                // Désactive la protection CSRF
+                                .csrf(csrf -> csrf.disable())
+                                // Configure les règles d'accès aux routes et ressources
+                                .authorizeHttpRequests(auth -> auth
+                                                // Routes et ressources accessibles SANS authentification
+                                                .requestMatchers("/", "/login", "/home", "/user/add", "/user/list",
+                                                                "/403", "/error",
+                                                                "/css/**",
+                                                                "/js/**", "/images/**", "/favicon.ico")
+                                                .permitAll()
+                                                // Autorise les requêtes HTTP OPTIONS
+                                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                                // Toutes les autres routes nécessitent une authentification
+                                                .anyRequest().authenticated())
+                                // Désactive le formulaire de connexion par défaut de Spring Security
+                                .formLogin(form -> form
+                                                .loginPage("/login")
+                                                .permitAll())
+                                // Désactive l'authentification HTTP Basic
+                                .httpBasic(httpBasic -> httpBasic.disable())
+                                .build();
+        }
 
-    // Gère l'authentification avec l'AuthenticationManager
-    @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
-    }
+        // Gère l'authentification avec l'AuthenticationManager
+        @Bean
+        public AuthenticationManager authenticationManager(
+                        AuthenticationConfiguration config) throws Exception {
+                return config.getAuthenticationManager();
+        }
 
-    // Configure BCrypt pour le hachage sécurisé des mots de passe
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        // Configure BCrypt pour le hachage sécurisé des mots de passe
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return email -> {
-            User user = userRepository.findByUsername(email)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        @Bean
+        public UserDetailsService userDetailsService(UserRepository userRepository) {
+                return email -> {
+                        User user = userRepository.findByUsername(email)
+                                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-            return org.springframework.security.core.userdetails.User
-                    .withUsername(user.getUsername())
-                    .password(user.getPassword())
-                    .roles("USER")
-                    .build();
-        };
-    }
+                        return org.springframework.security.core.userdetails.User
+                                        .withUsername(user.getUsername())
+                                        .password(user.getPassword())
+                                        .roles("USER")
+                                        .build();
+                };
+        }
 }

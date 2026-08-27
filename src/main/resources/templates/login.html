@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/css/loginStyle.css}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <title>Pay My Buddy - Connexion</title>
+    </head>
+    <body class="body-no-connected">
+        <div class="login-container">
+            <div class="title-login">
+                <h1 class="title-login-text">Login with Username and Password</h1>
+            </div>
+            <form th:action="@{/auth/login}" method="post">
+                <div class="label-input">
+                    <label for="username">User:</label>
+                    <input class="input-connexion input-username" type="text" name="username" required />
+                </div>
+                <div class="label-input">
+                    <label for="password">Password:</label>
+                    <input class="input-connexion" type="password" name="password" />
+                </div>
+                <a class="register-link" th:href="@{/register}">Créer un compte</a>
+                <button id="login-submit" class="connexion-btn" type="submit">Login</button>
+            </form>            
+        </div>
+    </body>
+</html>
