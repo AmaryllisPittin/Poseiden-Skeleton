@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title> Spring Boot </title>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 </head>
 <body>
+    <div sec:authorize="isAuthenticated()" class="row">
+		<div class="col-6">
+			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
+			<a href="/ruleName/list">Rule</a>
+		</div>
+		<div class="col-6 text-right">
+			Logged in user: <b class="user" sec:authentication="name"></b>
+			<form th:action="@{/logout}" method="POST">
+				<button type="submit">Logout</button>
+			</form>
+		</div>
+	</div>
 <h3> HOME PAGE </h3>
-<p>
-    <a href="/login">Login</a> or create one <a href="/user/list">User management</a>
+<p sec:authorize="!isAuthenticated()">
+    <a href="/login">Login</a>
+</p>
+<p sec:authorize="hasRole('ADMIN')">
+    or create one <a th:href="@{/user/list}">User management</a>
 </p>
 </body>
 </html>
