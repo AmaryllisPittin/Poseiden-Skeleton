@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -45,8 +42,7 @@ public class UserController {
 
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User user = userService.findById(id);
         user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";

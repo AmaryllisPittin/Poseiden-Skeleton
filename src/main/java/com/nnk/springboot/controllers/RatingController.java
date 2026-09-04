@@ -1,9 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.repositories.RatingRepository;
+import com.nnk.springboot.services.RatingService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +16,11 @@ import jakarta.validation.Valid;
 @Controller
 public class RatingController {
 
-    @Autowired
-    private RatingRepository ratingRepository;
+    private RatingService ratingService;
 
     @RequestMapping("/rating/list")
     public String home(Model model) {
-        model.addAttribute("ratings", ratingRepository.findAll());
+        model.addAttribute("ratings", ratingService.findAll());
         return "rating/list";
     }
 
@@ -37,14 +35,13 @@ public class RatingController {
             return "bidList/add";
         }
 
-        ratingRepository.save(rating);
+        ratingService.save(rating);
         return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        Rating rating = ratingRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid rating Id :" + id));
+        Rating rating = ratingService.findById(id);
 
         model.addAttribute("rating", rating);
         return "rating/update";
@@ -63,10 +60,8 @@ public class RatingController {
 
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        Rating rating = ratingRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid rating Id :" + id));
 
-        ratingRepository.delete(rating);
+        ratingService.deleteById(id);
         return "redirect:/rating/list";
     }
 }

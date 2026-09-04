@@ -1,9 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.RuleNameRepository;
+import com.nnk.springboot.services.RuleNameService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +16,15 @@ import jakarta.validation.Valid;
 @Controller
 public class RuleNameController {
 
-    @Autowired
-    private RuleNameRepository ruleNameRepository;
+    private final RuleNameService ruleNameService;
+
+    public RuleNameController(RuleNameService ruleNameService) {
+        this.ruleNameService = ruleNameService;
+    }
 
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
-        model.addAttribute("ruleNames", ruleNameRepository.findAll());
+        model.addAttribute("ruleNames", ruleNameService.findAll());
         return "ruleName/list";
     }
 
@@ -37,14 +39,13 @@ public class RuleNameController {
             return "ruleName/add";
         }
 
-        ruleNameRepository.save(ruleName);
+        ruleNameService.save(ruleName);
         return "ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        RuleName ruleName = ruleNameRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id :" + id));
+        RuleName ruleName = ruleNameService.findById(id);
 
         model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
@@ -63,10 +64,8 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        RuleName ruleName = ruleNameRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id :" + id));
 
-        ruleNameRepository.delete(ruleName);
+        ruleNameService.deleteById(id);
         return "redirect:/ruleName/list";
     }
 }

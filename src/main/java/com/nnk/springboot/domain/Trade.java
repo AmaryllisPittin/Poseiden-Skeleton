@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer TradeId;
+    private Integer tradeId;
 
     @Column(nullable = false, length = 30)
     private String account;

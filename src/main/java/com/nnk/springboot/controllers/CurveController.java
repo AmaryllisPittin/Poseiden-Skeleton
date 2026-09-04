@@ -1,9 +1,8 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.repositories.CurvePointRepository;
+import com.nnk.springboot.services.CurveService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +16,15 @@ import jakarta.validation.Valid;
 @Controller
 public class CurveController {
 
-    @Autowired
-    private CurvePointRepository curvePointRepository;
+    private final CurveService curveService;
+
+    public CurveController(CurveService curveService) {
+        this.curveService = curveService;
+    }
 
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
-        model.addAttribute("curvePoints", curvePointRepository.findAll());
+        model.addAttribute("curvePoints", curveService.findAll());
         return "curvePoint/list";
     }
 
@@ -37,14 +39,13 @@ public class CurveController {
             return "curvePoint/add";
         }
 
-        curvePointRepository.save(curvePoint);
+        curveService.save(curvePoint);
         return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        CurvePoint curvePoint = curvePointRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id :" + id));
+        CurvePoint curvePoint = curveService.findById(id);
 
         model.addAttribute("curvePoint", curvePoint);
 
@@ -65,10 +66,7 @@ public class CurveController {
 
     @GetMapping("/curvePoint/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        CurvePoint curvePoint = curvePointRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid curvePoint Id :" + id));
-
-        curvePointRepository.delete(curvePoint);
+        curveService.deleteById(id);
 
         return "redirect:/curvePoint/list";
     }
