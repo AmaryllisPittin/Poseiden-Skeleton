@@ -18,6 +18,10 @@ public class RatingController {
 
     private RatingService ratingService;
 
+    public RatingController(RatingService ratingService) {
+        this.ratingService = ratingService;
+    }
+
     @RequestMapping("/rating/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.findAll());
@@ -54,7 +58,7 @@ public class RatingController {
             return "rating/update";
         }
 
-        rating.setRatingId(id);
+        ratingService.update(id, rating);
         return "redirect:/rating/list";
     }
 

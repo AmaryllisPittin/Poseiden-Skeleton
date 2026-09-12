@@ -58,7 +58,7 @@ public class RuleNameController {
             return "ruleName/update";
         }
 
-        ruleName.setRuleNameId(id);
+        ruleNameService.update(id, ruleName);
         return "redirect:/ruleName/list";
     }
 

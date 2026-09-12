@@ -59,9 +59,9 @@ public class CurveController {
             return "curvePoint/update";
         }
 
-        curvePoint.setCurveId(id);
+        curveService.update(id, curvePoint);
 
-        return "redirect:/bidList/list";
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/delete/{id}")

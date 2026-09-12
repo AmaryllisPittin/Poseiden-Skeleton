@@ -2,9 +2,12 @@ package com.nnk.springboot.services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 
+@Service
 public class RuleNameService {
     private final RuleNameRepository ruleNameRepository;
 
