@@ -40,7 +40,7 @@ public class RuleNameController {
         }
 
         ruleNameService.save(ruleName);
-        return "ruleName/add";
+        return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/update/{id}")

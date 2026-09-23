@@ -40,7 +40,7 @@ public class TradeController {
         }
 
         tradeService.save(trade);
-        return "trade/add";
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")
