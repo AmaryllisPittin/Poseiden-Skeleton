@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
+/**
+ * 
+ * BidListController : gère la consultation, l'ajout, la modification et la
+ * suppression des bids
+ */
 @Controller
 public class BidListController {
 
@@ -32,7 +37,7 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
+    public String validate(@Valid BidList bid, BindingResult result) {
         if (result.hasErrors()) {
             return "bidList/add";
         }

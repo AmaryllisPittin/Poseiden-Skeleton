@@ -5,6 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 
+ * HomeController : gère l'accès à la page d'accueil et la redirection depuis
+ * l'accueil admin
+ */
 @Controller
 public class HomeController {
 

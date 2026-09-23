@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 
+/**
+ * 
+ * RuleNameController : gère la consultation, l'ajout, la modification et la
+ * suppression des ruleNames
+ */
 @Controller
 public class RuleNameController {
 

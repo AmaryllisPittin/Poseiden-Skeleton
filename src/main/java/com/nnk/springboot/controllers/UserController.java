@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 
+/**
+ * 
+ * UserController : gère l'affichage et les opérations de création, modification
+ * et suppression des utilisateurs
+ */
 @Controller
 public class UserController {
 
@@ -38,7 +43,7 @@ public class UserController {
             userService.save(user);
             return "redirect:/user/list";
         }
-        
+
         return "user/add";
 
     }

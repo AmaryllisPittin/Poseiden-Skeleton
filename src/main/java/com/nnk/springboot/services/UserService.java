@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 
+/**
+ * 
+ * UserService : gère les utilisateurs, et encode leur mot de passe avant
+ * l'enregistrement
+ */
 @Service
 public class UserService {
 

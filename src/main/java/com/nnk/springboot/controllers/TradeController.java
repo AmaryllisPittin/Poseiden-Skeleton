@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
 
+/**
+ * 
+ * TradeController : gère la consultation, l'ajout, la modification et la
+ * suppression des trades
+ */
 @Controller
 public class TradeController {
 

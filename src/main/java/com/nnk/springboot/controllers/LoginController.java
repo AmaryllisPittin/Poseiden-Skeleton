@@ -7,6 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * LoginController : gère l'affichage de la page de connexion, de la liste des
+ * utilisateurs, et de la page d'erreur d'accès
+ */
 @Controller
 public class LoginController {
 
