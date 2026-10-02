@@ -28,7 +28,7 @@ public class UserService {
 
     public User findById(Integer id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
     }
 
     public User save(User user) {

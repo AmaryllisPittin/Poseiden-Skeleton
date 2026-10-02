@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.services</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.services;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.UserRepository;
+
+/**
+ * 
+ * UserService : gère les utilisateurs, et encode leur mot de passe avant
+ * l'enregistrement
+ */
+@Service
+public class UserService {
+
+    private UserRepository userRepository;
+    private final PasswordEncoder encoder;
+
+<span class="fc" id="L20">    public UserService(UserRepository userRepository, PasswordEncoder encoder) {</span>
+<span class="fc" id="L21">        this.userRepository = userRepository;</span>
+<span class="fc" id="L22">        this.encoder = encoder;</span>
+<span class="fc" id="L23">    }</span>
+
+    public Iterable&lt;User&gt; findAll() {
+<span class="nc" id="L26">        return userRepository.findAll();</span>
+    }
+
+    public User findById(Integer id) {
+<span class="pc" id="L30">        return userRepository.findById(id)</span>
+<span class="pc" id="L31">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user ID: &quot; + id));</span>
+    }
+
+    public User save(User user) {
+
+<span class="nc" id="L36">        user.setPassword(encoder.encode(user.getPassword()));</span>
+
+<span class="nc" id="L38">        return userRepository.save(user);</span>
+    }
+
+    public User update(Integer id, User user) {
+<span class="fc" id="L42">        user.setId(id);</span>
+
+<span class="fc" id="L44">        user.setPassword(encoder.encode(user.getPassword()));</span>
+
+<span class="fc" id="L46">        return userRepository.save(user);</span>
+    }
+
+    public void delete(Integer id) {
+<span class="nc" id="L50">        User user = findById(id);</span>
+<span class="nc" id="L51">        userRepository.delete(user);</span>
+<span class="nc" id="L52">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
