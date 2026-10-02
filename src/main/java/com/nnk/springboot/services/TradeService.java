@@ -28,7 +28,7 @@ public class TradeService {
     public Trade findById(Integer id) {
         return tradeRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Invalid CurvePoint ID: " + id));
+                        "Invalid trade ID: " + id));
     }
 
     public Trade save(Trade curvePoint) {

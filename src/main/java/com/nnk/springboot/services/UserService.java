@@ -1,6 +1,5 @@
 package com.nnk.springboot.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +14,13 @@ import com.nnk.springboot.repositories.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
-    @Autowired
-    private PasswordEncoder encoder;
+    public UserService(UserRepository userRepository, PasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
+    }
 
     public Iterable<User> findAll() {
         return userRepository.findAll();

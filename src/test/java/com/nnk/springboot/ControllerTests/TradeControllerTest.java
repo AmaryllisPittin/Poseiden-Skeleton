@@ -4,7 +4,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.nnk.springboot.controllers.TradeController;
 import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.repositories.TradeRepository;
+import com.nnk.springboot.services.TradeService;
 
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -29,62 +28,59 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @WithMockUser
 public class TradeControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private TradeRepository tradeRepository;
+        @MockBean
+        private TradeService tradeService;
 
-    @Test
-    public void homeTest() throws Exception {
-        Trade trade = new Trade();
+        @Test
+        public void homeTest() throws Exception {
+                Trade trade = new Trade();
 
-        when(tradeRepository.findAll())
-                .thenReturn(List.of(trade));
+                when(tradeService.findAll())
+                                .thenReturn(List.of(trade));
 
-        mockMvc.perform(get("/trade/list"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/list"))
-                .andExpect(model().attributeExists("trades"));
+                mockMvc.perform(get("/trade/list"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("trade/list"))
+                                .andExpect(model().attributeExists("trades"));
 
-        verify(tradeRepository).findAll();
-    }
+                verify(tradeService).findAll();
+        }
 
-    @Test
-    public void addFormTest() throws Exception {
-        mockMvc.perform(get("/trade/add"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/add"));
-    }
+        @Test
+        public void addFormTest() throws Exception {
+                mockMvc.perform(get("/trade/add"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("trade/add"));
+        }
 
-    @Test
-    public void showUpdateFormTest() throws Exception {
-        Trade trade = new Trade();
+        @Test
+        public void showUpdateFormTest() throws Exception {
+                Trade trade = new Trade();
 
-        when(tradeRepository.findById(1))
-                .thenReturn(Optional.of(trade));
+                when(tradeService.findById(1))
+                                .thenReturn(trade);
 
-        mockMvc.perform(get("/trade/update/1")
-                .with(csrf()))
-                .andExpect(status().isOk())
-                .andExpect(view().name("trade/update"))
-                .andExpect(model().attributeExists("trade"));
+                mockMvc.perform(get("/trade/update/1")
+                                .with(csrf()))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("trade/update"))
+                                .andExpect(model().attributeExists("trade"));
 
-        verify(tradeRepository).findById(1);
-    }
+                verify(tradeService).findById(1);
+        }
 
-    @Test
-    public void deleteTest() throws Exception {
-        Trade trade = new Trade();
+        @Test
+        public void deleteTest() throws Exception {
 
-        when(tradeRepository.findById(1))
-                .thenReturn(Optional.of(trade));
+                mockMvc.perform(get("/trade/delete/1")
+                                .with(csrf()))
+                                .andExpect(status().is3xxRedirection())
+                                .andExpect(redirectedUrl("/trade/list"));
 
-        mockMvc.perform(get("/trade/delete/1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/trade/list"));
-
-        verify(tradeRepository).delete(trade);
-    }
+                verify(tradeService).deleteById(1);
+        }
 
 }
