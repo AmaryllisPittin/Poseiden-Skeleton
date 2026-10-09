@@ -53,4 +53,17 @@ public class UserServiceTests {
         verify(repository).save(user);
     }
 
+    @Test
+    void findById_returnsUser() {
+        User user = new User();
+
+        when(repository.findById(1)).thenReturn(Optional.of(user));
+
+        User result = service.findById(1);
+
+        assertSame(user, result);
+        verify(repository).findById(1);
+
+    }
+
 }

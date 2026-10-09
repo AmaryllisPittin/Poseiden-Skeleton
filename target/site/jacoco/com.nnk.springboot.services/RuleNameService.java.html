@@ -21,12 +21,12 @@ public class RuleNameService {
 <span class="fc" id="L21">    }</span>
 
     public List&lt;RuleName&gt; findAll() {
-<span class="nc" id="L24">        return ruleNameRepository.findAll();</span>
+<span class="fc" id="L24">        return ruleNameRepository.findAll();</span>
     }
 
     public RuleName findById(Integer id) {
-<span class="pc" id="L28">        return ruleNameRepository.findById(id)</span>
-<span class="pc" id="L29">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
+<span class="fc" id="L28">        return ruleNameRepository.findById(id)</span>
+<span class="fc" id="L29">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
                         &quot;Invalid ruleName ID: &quot; + id));
     }
 
@@ -40,8 +40,8 @@ public class RuleNameService {
     }
 
     public void deleteById(Integer id) {
-<span class="nc" id="L43">        ruleNameRepository.deleteById(id);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        ruleNameRepository.deleteById(id);</span>
+<span class="fc" id="L44">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

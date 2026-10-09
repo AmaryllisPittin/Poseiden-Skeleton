@@ -50,4 +50,27 @@ public class TradeServiceTests {
         verify(repository).save(trade);
     }
 
+    @Test
+    void findById_returnsTrade() {
+
+        Trade trade = new Trade();
+
+        when(repository.findById(1)).thenReturn(Optional.of(trade));
+
+        Trade result = service.findById(1);
+
+        assertSame(trade, result);
+        verify(repository).findById(1);
+
+    }
+
+    @Test
+    void deleteById_deletesTrade() {
+
+        service.deleteById(1);
+
+        verify(repository).deleteById(1);
+
+    }
+
 }

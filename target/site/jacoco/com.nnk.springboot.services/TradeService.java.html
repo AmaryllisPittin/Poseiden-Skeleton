@@ -26,8 +26,8 @@ public class TradeService {
     }
 
     public Trade findById(Integer id) {
-<span class="pc" id="L29">        return tradeRepository.findById(id)</span>
-<span class="pc" id="L30">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
+<span class="fc" id="L29">        return tradeRepository.findById(id)</span>
+<span class="fc" id="L30">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
 <span class="fc" id="L31">                        &quot;Invalid trade ID: &quot; + id));</span>
     }
 
@@ -41,8 +41,8 @@ public class TradeService {
     }
 
     public void deleteById(Integer id) {
-<span class="nc" id="L44">        tradeRepository.deleteById(id);</span>
-<span class="nc" id="L45">    }</span>
+<span class="fc" id="L44">        tradeRepository.deleteById(id);</span>
+<span class="fc" id="L45">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

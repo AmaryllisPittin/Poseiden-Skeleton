@@ -15,72 +15,77 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.nnk.springboot.controllers.RatingController;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
 
+@WebMvcTest(RatingController.class)
+@WithMockUser
 public class RatingControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private RatingService ratingService;
+        @MockBean
+        private RatingService ratingService;
 
-    @Test
-    public void homeTest() throws Exception {
-        Rating rating = new Rating();
+        @Test
+        public void homeTest() throws Exception {
+                Rating rating = new Rating();
 
-        when(ratingService.findAll())
-                .thenReturn(List.of(rating));
+                when(ratingService.findAll())
+                                .thenReturn(List.of(rating));
 
-        mockMvc.perform(get("/rating/list"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/list"))
-                .andExpect(model().attributeExists("rating"));
+                mockMvc.perform(get("/rating/list"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("rating/list"))
+                                .andExpect(model().attributeExists("ratings"));
 
-        verify(ratingService).findAll();
-    }
+                verify(ratingService).findAll();
+        }
 
-    @Test
-    public void addFormTest() throws Exception {
-        mockMvc.perform(post("/rating/validate")
-                .with(csrf())
-                .param("bidListId", "10")
-                .param("term", "10")
-                .param("value", "30"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/rating/list"));
+        @Test
+        public void addFormTest() throws Exception {
+                mockMvc.perform(post("/rating/validate")
+                                .with(csrf())
+                                .param("bidListId", "10")
+                                .param("term", "10")
+                                .param("value", "30"))
+                                .andExpect(status().is3xxRedirection())
+                                .andExpect(redirectedUrl("/rating/list"));
 
-        verify(ratingService).save(any(Rating.class));
-    }
+                verify(ratingService).save(any(Rating.class));
+        }
 
-    @Test
-    public void showUpdateFormTest() throws Exception {
-        Rating rating = new Rating();
+        @Test
+        public void showUpdateFormTest() throws Exception {
+                Rating rating = new Rating();
 
-        when(ratingService.findById(1))
-                .thenReturn(rating);
+                when(ratingService.findById(1))
+                                .thenReturn(rating);
 
-        mockMvc.perform(get("/rating/update/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("rating/update"))
-                .andExpect(model().attributeExists("rating"));
+                mockMvc.perform(get("/rating/update/1"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("rating/update"))
+                                .andExpect(model().attributeExists("rating"));
 
-        verify(ratingService).findById(1);
-    }
+                verify(ratingService).findById(1);
+        }
 
-    @Test
-    public void deleteTest() throws Exception {
+        @Test
+        public void deleteTest() throws Exception {
 
-        mockMvc.perform(get("/rating/delete/1")
-                .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/rating/list"));
+                mockMvc.perform(get("/rating/delete/1")
+                                .with(csrf()))
+                                .andExpect(status().is3xxRedirection())
+                                .andExpect(redirectedUrl("/rating/list"));
 
-        verify(ratingService).deleteById(1);
-    }
+                verify(ratingService).deleteById(1);
+        }
 
 }

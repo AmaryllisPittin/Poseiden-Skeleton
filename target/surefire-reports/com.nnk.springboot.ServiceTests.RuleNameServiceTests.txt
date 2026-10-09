@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.nnk.springboot.ServiceTests.RuleNameServiceTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.39 s - in com.nnk.springboot.ServiceTests.RuleNameServiceTests
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.265 s - in com.nnk.springboot.ServiceTests.RuleNameServiceTests

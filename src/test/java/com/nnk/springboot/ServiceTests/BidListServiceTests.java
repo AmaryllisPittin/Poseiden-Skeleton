@@ -50,4 +50,27 @@ public class BidListServiceTests {
         verify(repository).save(bid);
     }
 
+    @Test
+    void findById_returnsBidLists() {
+
+        BidList bidList = new BidList();
+
+        when(repository.findById(1)).thenReturn(Optional.of(bidList));
+
+        BidList result = service.findById(1);
+
+        assertSame(bidList, result);
+        verify(repository).findById(1);
+
+    }
+
+    @Test
+    void deleteById_deletesBidList() {
+
+        service.deleteById(1);
+
+        verify(repository).deleteById(1);
+
+    }
+
 }

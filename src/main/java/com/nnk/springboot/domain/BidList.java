@@ -3,7 +3,9 @@ package com.nnk.springboot.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,12 +22,17 @@ public class BidList {
     private Integer bidListId;
 
     @Column(nullable = false, length = 30)
+    @NotBlank(message = "Account is mandatory")
     private String account;
 
     @Column(nullable = false, length = 30)
+    @NotBlank(message = "Type is mandatory")
     private String type;
 
+    @NotNull(message = "Bid Quantity is mandatory")
+    @Positive(message = "Bid Quantity must be greater than zero")
     private Double bidQuantity;
+
     private Double askQuantity;
     private Double bid;
     private Double ask;

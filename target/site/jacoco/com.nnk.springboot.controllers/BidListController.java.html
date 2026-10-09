@@ -27,8 +27,8 @@ public class BidListController {
 
     @RequestMapping(&quot;/bidList/list&quot;)
     public String home(Model model) {
-<span class="nc" id="L30">        model.addAttribute(&quot;bidLists&quot;, bidListService.findAll());</span>
-<span class="nc" id="L31">        return &quot;bidList/list&quot;;</span>
+<span class="fc" id="L30">        model.addAttribute(&quot;bidLists&quot;, bidListService.findAll());</span>
+<span class="fc" id="L31">        return &quot;bidList/list&quot;;</span>
     }
 
     @GetMapping(&quot;/bidList/add&quot;)
@@ -38,21 +38,21 @@ public class BidListController {
 
     @PostMapping(&quot;/bidList/validate&quot;)
     public String validate(@Valid BidList bid, BindingResult result) {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
 <span class="nc" id="L42">            return &quot;bidList/add&quot;;</span>
         }
 
-<span class="nc" id="L45">        bidListService.save(bid);</span>
-<span class="nc" id="L46">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="fc" id="L45">        bidListService.save(bid);</span>
+<span class="fc" id="L46">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 
     @GetMapping(&quot;/bidList/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L51">        BidList bidList = bidListService.findById(id);</span>
+<span class="fc" id="L51">        BidList bidList = bidListService.findById(id);</span>
 
-<span class="nc" id="L53">        model.addAttribute(&quot;bidList&quot;, bidList);</span>
+<span class="fc" id="L53">        model.addAttribute(&quot;bidList&quot;, bidList);</span>
 
-<span class="nc" id="L55">        return &quot;bidList/update&quot;;</span>
+<span class="fc" id="L55">        return &quot;bidList/update&quot;;</span>
     }
 
     @PostMapping(&quot;/bidList/update/{id}&quot;)
@@ -71,9 +71,9 @@ public class BidListController {
     @GetMapping(&quot;/bidList/delete/{id}&quot;)
     public String deleteBid(@PathVariable(&quot;id&quot;) Integer id) {
 
-<span class="nc" id="L74">        bidListService.deleteById(id);</span>
+<span class="fc" id="L74">        bidListService.deleteById(id);</span>
 
-<span class="nc" id="L76">        return &quot;redirect:/bidList/list&quot;;</span>
+<span class="fc" id="L76">        return &quot;redirect:/bidList/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

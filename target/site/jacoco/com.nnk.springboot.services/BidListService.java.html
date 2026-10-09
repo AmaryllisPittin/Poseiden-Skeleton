@@ -25,8 +25,8 @@ public class BidListService {
     }
 
     public BidList findById(Integer id) {
-<span class="pc" id="L28">        return bidListRepository.findById(id)</span>
-<span class="pc" id="L29">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
+<span class="fc" id="L28">        return bidListRepository.findById(id)</span>
+<span class="fc" id="L29">                .orElseThrow(() -&gt; new IllegalArgumentException(</span>
                         &quot;Invalid BidList ID: &quot; + id));
     }
 
@@ -40,7 +40,7 @@ public class BidListService {
     }
 
     public void deleteById(Integer id) {
-<span class="nc" id="L43">        bidListRepository.deleteById(id);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        bidListRepository.deleteById(id);</span>
+<span class="fc" id="L44">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

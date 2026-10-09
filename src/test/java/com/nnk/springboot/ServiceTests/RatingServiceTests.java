@@ -49,4 +49,27 @@ public class RatingServiceTests {
         assertSame(rating, result);
         verify(repository).save(rating);
     }
+
+    @Test
+    void findById_returnsRating() {
+
+        Rating rating = new Rating();
+
+        when(repository.findById(1)).thenReturn(Optional.of(rating));
+
+        Rating result = service.findById(1);
+
+        assertSame(rating, result);
+        verify(repository).findById(1);
+
+    }
+
+    @Test
+    void deleteById_deletesRating() {
+
+        service.deleteById(1);
+
+        verify(repository).deleteById(1);
+
+    }
 }

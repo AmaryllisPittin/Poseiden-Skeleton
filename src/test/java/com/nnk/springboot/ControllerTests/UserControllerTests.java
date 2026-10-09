@@ -15,12 +15,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
 
+@WebMvcTest(UserController.class)
+@WithMockUser
 public class UserControllerTests {
 
     @Autowired
@@ -45,9 +50,13 @@ public class UserControllerTests {
     }
 
     @Test
-    public void addFormTest() throws Exception {
+    public void validateUserTest() throws Exception {
         mockMvc.perform(post("/user/validate")
-                .with(csrf()))
+                .with(csrf())
+                .param("username", "testuser")
+                .param("password", "Password_1235")
+                .param("fullname", "testuser A")
+                .param("role", "USER"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/user/list"));
 

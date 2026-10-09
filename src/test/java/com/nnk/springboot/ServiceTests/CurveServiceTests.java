@@ -50,4 +50,27 @@ public class CurveServiceTests {
         verify(repository).save(curvePoint);
     }
 
+    @Test
+    void findById_returnsCurvePoints() {
+
+        CurvePoint curvePoint = new CurvePoint();
+
+        when(repository.findById(1)).thenReturn(Optional.of(curvePoint));
+
+        CurvePoint result = service.findById(1);
+
+        assertSame(curvePoint, result);
+        verify(repository).findById(1);
+
+    }
+
+    @Test
+    void deleteById_deletesCurvePoint() {
+
+        service.deleteById(1);
+
+        verify(repository).deleteById(1);
+
+    }
+
 }

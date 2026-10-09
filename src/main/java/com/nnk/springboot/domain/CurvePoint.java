@@ -3,6 +3,7 @@ package com.nnk.springboot.domain;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,13 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "CurveId")
+    @NotNull(message = "must not be null")
     private Integer curveId;
-
+    @Column(name = "asOfDate")
     private LocalDateTime asOfDate;
     private Double term;
     private Double value;
+    @Column(name = "creationDate")
     private LocalDateTime creationDate;
 
     public CurvePoint(Integer curveId, Double term, Double value) {

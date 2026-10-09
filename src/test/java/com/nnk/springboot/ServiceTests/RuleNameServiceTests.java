@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,46 @@ public class RuleNameServiceTests {
         assertEquals(5, ruleName.getRuleNameId());
         assertSame(ruleName, result);
         verify(repository).save(ruleName);
+    }
+
+    @Test
+    void findAll_returnsAllRuleNames() {
+
+        RuleName ruleName1 = new RuleName();
+        RuleName ruleName2 = new RuleName();
+
+        List<RuleName> ruleNames = List.of(ruleName1, ruleName2);
+
+        when(repository.findAll()).thenReturn(ruleNames);
+
+        List<RuleName> result = service.findAll();
+
+        assertEquals(ruleNames, result);
+        verify(repository).findAll();
+
+    }
+
+    @Test
+    void findById_returnsRuleNames() {
+
+        RuleName ruleName = new RuleName();
+
+        when(repository.findById(1)).thenReturn(Optional.of(ruleName));
+
+        RuleName result = service.findById(1);
+
+        assertSame(ruleName, result);
+        verify(repository).findById(1);
+
+    }
+
+    @Test
+    void deleteById_deletesRuleName() {
+
+        service.deleteById(1);
+
+        verify(repository).deleteById(1);
+
     }
 
 }

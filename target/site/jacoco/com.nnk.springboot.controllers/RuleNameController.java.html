@@ -29,8 +29,8 @@ public class RuleNameController {
 
     @RequestMapping(&quot;/ruleName/list&quot;)
     public String home(Model model) {
-<span class="nc" id="L32">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
-<span class="nc" id="L33">        return &quot;ruleName/list&quot;;</span>
+<span class="fc" id="L32">        model.addAttribute(&quot;ruleNames&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L33">        return &quot;ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/add&quot;)
@@ -40,20 +40,20 @@ public class RuleNameController {
 
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
 <span class="nc" id="L44">            return &quot;ruleName/add&quot;;</span>
         }
 
-<span class="nc" id="L47">        ruleNameService.save(ruleName);</span>
-<span class="nc" id="L48">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L47">        ruleNameService.save(ruleName);</span>
+<span class="fc" id="L48">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L53">        RuleName ruleName = ruleNameService.findById(id);</span>
+<span class="fc" id="L53">        RuleName ruleName = ruleNameService.findById(id);</span>
 
-<span class="nc" id="L55">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
-<span class="nc" id="L56">        return &quot;ruleName/update&quot;;</span>
+<span class="fc" id="L55">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
+<span class="fc" id="L56">        return &quot;ruleName/update&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/update/{id}&quot;)
@@ -70,8 +70,8 @@ public class RuleNameController {
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
 
-<span class="nc" id="L73">        ruleNameService.deleteById(id);</span>
-<span class="nc" id="L74">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L73">        ruleNameService.deleteById(id);</span>
+<span class="fc" id="L74">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

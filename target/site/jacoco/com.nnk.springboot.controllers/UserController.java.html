@@ -28,8 +28,8 @@ import jakarta.validation.Valid;
 
     @RequestMapping(&quot;/user/list&quot;)
     public String home(Model model) {
-<span class="nc" id="L31">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L32">        return &quot;user/list&quot;;</span>
+<span class="fc" id="L31">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L32">        return &quot;user/list&quot;;</span>
     }
 
     @GetMapping(&quot;/user/add&quot;)
@@ -39,9 +39,9 @@ import jakarta.validation.Valid;
 
     @PostMapping(&quot;/user/validate&quot;)
     public String validate(@Valid @ModelAttribute(&quot;user&quot;) User user, BindingResult result, Model model) {
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L43">            userService.save(user);</span>
-<span class="nc" id="L44">            return &quot;redirect:/user/list&quot;;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L43">            userService.save(user);</span>
+<span class="fc" id="L44">            return &quot;redirect:/user/list&quot;;</span>
         }
 
 <span class="nc" id="L47">        return &quot;user/add&quot;;</span>
@@ -50,10 +50,10 @@ import jakarta.validation.Valid;
 
     @GetMapping(&quot;/user/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L53">        User user = userService.findById(id);</span>
-<span class="nc" id="L54">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L55">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L56">        return &quot;user/update&quot;;</span>
+<span class="fc" id="L53">        User user = userService.findById(id);</span>
+<span class="fc" id="L54">        user.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L55">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L56">        return &quot;user/update&quot;;</span>
     }
 
     @PostMapping(&quot;/user/update/{id}&quot;)
@@ -68,9 +68,9 @@ import jakarta.validation.Valid;
 
     @GetMapping(&quot;/user/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L71">        userService.delete(id);</span>
-<span class="nc" id="L72">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L73">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L71">        userService.delete(id);</span>
+<span class="fc" id="L72">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L73">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

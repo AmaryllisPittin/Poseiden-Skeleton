@@ -15,6 +15,9 @@
                 <h1 class="title-login-text">Login with Username and Password</h1>
             </div>
             <form th:action="@{/login}" method="post">
+                <p class="text-error" color="red" th:if="${param.error}">
+                    Nom d'utilisateur ou mot de passe incorrect.
+                </p>
                 <div class="label-input">
                     <label for="username">User:</label>
                     <input class="input-connexion input-username" type="text" name="username" required />

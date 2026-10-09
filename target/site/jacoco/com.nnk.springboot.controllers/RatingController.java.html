@@ -29,8 +29,8 @@ public class RatingController {
 
     @RequestMapping(&quot;/rating/list&quot;)
     public String home(Model model) {
-<span class="nc" id="L32">        model.addAttribute(&quot;ratings&quot;, ratingService.findAll());</span>
-<span class="nc" id="L33">        return &quot;rating/list&quot;;</span>
+<span class="fc" id="L32">        model.addAttribute(&quot;ratings&quot;, ratingService.findAll());</span>
+<span class="fc" id="L33">        return &quot;rating/list&quot;;</span>
     }
 
     @GetMapping(&quot;/rating/add&quot;)
@@ -40,20 +40,20 @@ public class RatingController {
 
     @PostMapping(&quot;/rating/validate&quot;)
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
 <span class="nc" id="L44">            return &quot;bidList/add&quot;;</span>
         }
 
-<span class="nc" id="L47">        ratingService.save(rating);</span>
-<span class="nc" id="L48">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L47">        ratingService.save(rating);</span>
+<span class="fc" id="L48">        return &quot;redirect:/rating/list&quot;;</span>
     }
 
     @GetMapping(&quot;/rating/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L53">        Rating rating = ratingService.findById(id);</span>
+<span class="fc" id="L53">        Rating rating = ratingService.findById(id);</span>
 
-<span class="nc" id="L55">        model.addAttribute(&quot;rating&quot;, rating);</span>
-<span class="nc" id="L56">        return &quot;rating/update&quot;;</span>
+<span class="fc" id="L55">        model.addAttribute(&quot;rating&quot;, rating);</span>
+<span class="fc" id="L56">        return &quot;rating/update&quot;;</span>
     }
 
     @PostMapping(&quot;/rating/update/{id}&quot;)
@@ -70,8 +70,8 @@ public class RatingController {
     @GetMapping(&quot;/rating/delete/{id}&quot;)
     public String deleteRating(@PathVariable(&quot;id&quot;) Integer id, Model model) {
 
-<span class="nc" id="L73">        ratingService.deleteById(id);</span>
-<span class="nc" id="L74">        return &quot;redirect:/rating/list&quot;;</span>
+<span class="fc" id="L73">        ratingService.deleteById(id);</span>
+<span class="fc" id="L74">        return &quot;redirect:/rating/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

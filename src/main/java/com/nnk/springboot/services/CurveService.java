@@ -36,8 +36,13 @@ public class CurveService {
     }
 
     public CurvePoint update(Integer id, CurvePoint curvePoint) {
-        curvePoint.setCurveId(id);
-        return curvePointRepository.save(curvePoint);
+        CurvePoint existingCurvePoint = findById(id);
+
+        existingCurvePoint.setCurveId(curvePoint.getCurveId());
+        existingCurvePoint.setTerm(curvePoint.getTerm());
+        existingCurvePoint.setValue(curvePoint.getValue());
+
+        return curvePointRepository.save(existingCurvePoint);
     }
 
     public void deleteById(Integer id) {

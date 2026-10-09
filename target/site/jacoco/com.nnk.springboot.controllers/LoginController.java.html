@@ -20,17 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 
     @GetMapping(&quot;/login&quot;)
     public ModelAndView login() {
-<span class="nc" id="L23">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L24">        mav.setViewName(&quot;login&quot;);</span>
-<span class="nc" id="L25">        return mav;</span>
+<span class="fc" id="L23">        ModelAndView mav = new ModelAndView();</span>
+<span class="fc" id="L24">        mav.setViewName(&quot;login&quot;);</span>
+<span class="fc" id="L25">        return mav;</span>
     }
 
     @GetMapping(&quot;secure/article-details&quot;)
     public ModelAndView getAllUserArticles() {
-<span class="nc" id="L30">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L31">        mav.addObject(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L32">        mav.setViewName(&quot;user/list&quot;);</span>
-<span class="nc" id="L33">        return mav;</span>
+<span class="fc" id="L30">        ModelAndView mav = new ModelAndView();</span>
+<span class="fc" id="L31">        mav.addObject(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L32">        mav.setViewName(&quot;user/list&quot;);</span>
+<span class="fc" id="L33">        return mav;</span>
     }
 
     @GetMapping(&quot;error&quot;)

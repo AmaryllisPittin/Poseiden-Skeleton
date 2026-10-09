@@ -33,19 +33,18 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(User bid) {
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
         return "user/add";
     }
 
     @PostMapping("/user/validate")
-    public String validate(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+    public String validate(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (!result.hasErrors()) {
-            userService.save(user);
-            return "redirect:/user/list";
+            return "user/add";
         }
-
-        return "user/add";
-
+        userService.save(user);
+        return "redirect:/user/list";
     }
 
     @GetMapping("/user/update/{id}")
@@ -57,8 +56,8 @@ public class UserController {
     }
 
     @PostMapping("/user/update/{id}")
-    public String updateUser(@PathVariable("id") Integer id, @Valid User user,
-            BindingResult result, Model model) {
+    public String updateUser(@PathVariable("id") Integer id, @Valid @ModelAttribute("user") User user,
+            BindingResult result) {
         if (result.hasErrors()) {
             return "user/update";
         }
