@@ -72,8 +72,8 @@ public class Config {
 
         @Bean
         public UserDetailsService userDetailsService(UserRepository userRepository) {
-                return email -> {
-                        User user = userRepository.findByUsername(email)
+                return username -> {
+                        User user = userRepository.findByUsername(username)
                                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
                         return org.springframework.security.core.userdetails.User
