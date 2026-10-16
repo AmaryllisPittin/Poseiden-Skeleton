@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/user/validate")
     public String validate(@Valid @ModelAttribute("user") User user, BindingResult result) {
-        if (!result.hasErrors()) {
+        if (result.hasErrors()) {
             return "user/add";
         }
         userService.save(user);
