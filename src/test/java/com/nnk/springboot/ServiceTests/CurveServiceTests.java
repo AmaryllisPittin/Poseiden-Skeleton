@@ -40,14 +40,20 @@ public class CurveServiceTests {
 
     @Test
     void update_setsIdBeforeSaving() {
-        CurvePoint curvePoint = new CurvePoint();
-        when(repository.save(curvePoint)).thenReturn(curvePoint);
+        CurvePoint existing = new CurvePoint();
+        CurvePoint updated = new CurvePoint(10, 2.0, 100.0);
 
-        CurvePoint result = service.update(5, curvePoint);
+        when(repository.findById(5)).thenReturn(Optional.of(existing));
+        when(repository.save(existing)).thenReturn(existing);
 
-        assertEquals(5, curvePoint.getCurveId());
-        assertSame(curvePoint, result);
-        verify(repository).save(curvePoint);
+        CurvePoint result = service.update(5, updated);
+
+        assertEquals(10, existing.getCurveId());
+        assertEquals(2.0, existing.getTerm());
+        assertEquals(100.0, existing.getValue());
+        assertSame(existing, result);
+
+        verify(repository).save(existing);
     }
 
     @Test

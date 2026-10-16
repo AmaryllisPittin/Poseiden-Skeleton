@@ -28,65 +28,65 @@ import com.nnk.springboot.services.BidListService;
 @WithMockUser
 public class BidListControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @MockBean
-    private BidListService bidListService;
+        @MockBean
+        private BidListService bidListService;
 
-    @Test
-    public void homeTest() throws Exception {
-        BidList bidList = new BidList();
+        @Test
+        public void homeTest() throws Exception {
+                BidList bidList = new BidList();
 
-        when(bidListService.findAll())
-                .thenReturn(List.of(bidList));
+                when(bidListService.findAll())
+                                .thenReturn(List.of(bidList));
 
-        mockMvc.perform(get("/bidList/list"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bidList/list"))
-                .andExpect(model().attributeExists("bidLists"));
+                mockMvc.perform(get("/bidList/list"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("bidList/list"))
+                                .andExpect(model().attributeExists("bidLists"));
 
-        verify(bidListService).findAll();
-    }
+                verify(bidListService).findAll();
+        }
 
-    @Test
-    public void addFormTest() throws Exception {
-        mockMvc.perform(post("/bidList/validate")
-                .with(csrf())
-                .param("bidListId", "10")
-                .param("term", "10")
-                .param("value", "30"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/bidList/list"));
+        @Test
+        public void addFormTest() throws Exception {
+                mockMvc.perform(post("/bidList/validate")
+                                .with(csrf())
+                                .param("account", "Test")
+                                .param("type", "Test")
+                                .param("bidQuantity", "30"))
+                                .andExpect(status().is3xxRedirection())
+                                .andExpect(redirectedUrl("/bidList/list"));
 
-        verify(bidListService).save(any(BidList.class));
-    }
+                verify(bidListService).save(any(BidList.class));
+        }
 
-    @Test
+        @Test
 
-    public void showUpdateFormTest() throws Exception {
-        BidList bidList = new BidList();
+        public void showUpdateFormTest() throws Exception {
+                BidList bidList = new BidList();
 
-        when(bidListService.findById(1))
-                .thenReturn(bidList);
+                when(bidListService.findById(1))
+                                .thenReturn(bidList);
 
-        mockMvc.perform(get("/bidList/update/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bidList/update"))
-                .andExpect(model().attributeExists("bidList"));
+                mockMvc.perform(get("/bidList/update/1"))
+                                .andExpect(status().isOk())
+                                .andExpect(view().name("bidList/update"))
+                                .andExpect(model().attributeExists("bidList"));
 
-        verify(bidListService).findById(1);
-    }
+                verify(bidListService).findById(1);
+        }
 
-    @Test
-    public void deleteTest() throws Exception {
+        @Test
+        public void deleteTest() throws Exception {
 
-        mockMvc.perform(get("/bidList/delete/1")
-                .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/bidList/list"));
+                mockMvc.perform(get("/bidList/delete/1")
+                                .with(csrf()))
+                                .andExpect(status().is3xxRedirection())
+                                .andExpect(redirectedUrl("/bidList/list"));
 
-        verify(bidListService).deleteById(1);
-    }
+                verify(bidListService).deleteById(1);
+        }
 
 }
